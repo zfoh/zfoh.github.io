@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ZuriHac 2021</title>
   <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="stylesheet" type="text/css" href="/css/zurihac2021.css?v=2" />
+  <link rel="stylesheet" type="text/css" href="/css/zurihac2021.css?v=3" />
 
   <meta property="og:title" content="ZuriHac 2021" />
   <meta property="og:description"
@@ -21,8 +21,8 @@
   <style>
     :root {
       --ani-total-duration: 60s;
-      --mover-y: 0;
-      --mover-z: 1;
+      --floater-y: 0;
+      --floater-z: 1;
     }
     @media screen and (max-width: 768px) {
       :root{
@@ -30,7 +30,7 @@
       }
     }
 
-    .animation-wrapper {
+    header {
       position: relative;
       height: 400px;
       overflow-x: hidden;
@@ -41,21 +41,17 @@
       background-size: auto 400px;
       background-repeat: repeat-x;
       background-position: center;
-      /* z-index: 1000000;
-      /* outline: red dashed 10px;
-        outline-offset: -10px; */
     }
 
-    .mover {
+    .floater {
       position: absolute;
       width: 300px;
       height: 300px;
-      animation: moving calc(var(--ani-total-duration) / var(--mover-z)) linear infinite both;
-      /* z-index: var(--mover-z); */
+      animation: moving calc(var(--ani-total-duration) / var(--floater-z)) linear infinite both;
     }
 
-    .mover .logo,
-    .mover .cloud {
+    .floater .logo,
+    .floater .cloud {
       position: absolute;
       top: 0;
       left: 0;
@@ -63,35 +59,35 @@
       height: 100%;
     }
 
-    .mover .cloud {
+    .floater .cloud {
       animation: cloud-frames var(--ani-total-duration) infinite both;
     }
-    .mover .logo {
+    .floater .logo {
       animation: logo-frames var(--ani-total-duration) infinite both;
     }
 
-    .mover.cloud-a,
-    .mover.cloud-a .logo,
-    .mover.cloud-a .cloud {
+    .floater.cloud-a,
+    .floater.cloud-a .logo,
+    .floater.cloud-a .cloud {
       animation-delay: 0s;
-      --mover-z: 1;
-      --mover-y: 40px;
+      --floater-z: 1;
+      --floater-y: 40px;
     }
 
-    .mover.cloud-b,
-    .mover.cloud-b .logo,
-    .mover.cloud-b .cloud {
+    .floater.cloud-b,
+    .floater.cloud-b .logo,
+    .floater.cloud-b .cloud {
       animation-delay: calc(var(--ani-total-duration) / -5);
-      --mover-y: -100px;
-      --mover-z: 2;
+      --floater-y: -100px;
+      --floater-z: 2;
     }
 
-    .mover.cloud-c,
-    .mover.cloud-c .logo,
-    .mover.cloud-c .cloud {
+    .floater.cloud-c,
+    .floater.cloud-c .logo,
+    .floater.cloud-c .cloud {
       animation-delay: calc(var(--ani-total-duration) / -3 * 2);
-      --mover-z: 3;
-      --mover-y: -50px;
+      --floater-z: 3;
+      --floater-y: -50px;
     }
 
     @keyframes cloud-frames {
@@ -113,10 +109,10 @@
 
     @keyframes moving {
       0% {
-        transform: translate3d(-100%,var(--mover-y),0) scale(calc(0.5 * var(--mover-z)));
+        transform: translate3d(-100%,var(--floater-y),0) scale(calc(0.5 * var(--floater-z)));
       }
       100% {
-        transform: translate3d(100vw,var(--mover-y),0) scale(calc(0.5 * var(--mover-z)));
+        transform: translate3d(100vw,var(--floater-y),0) scale(calc(0.5 * var(--floater-z)));
       }
     }
 
@@ -143,22 +139,22 @@
 </head>
 
 <body>
-  <div class="animation-wrapper">
+  <header>
     <img class="header-background">
-    <div class="mover cloud-a">
+    <div class="floater cloud-a">
       <img src="/images/zurihac2021/cloud-a.svg" alt="abstract cloud" class="cloud">
       <img src="/images/zurihac2021/cloud-logo.svg" alt="zurihac2021 logo" class="logo">
     </div>
     <img class="header-foreground">
-    <div class="mover cloud-b">
+    <div class="floater cloud-b">
       <img src="/images/zurihac2021/cloud-b.svg" alt="abstract cloud" class="cloud">
       <img src="/images/zurihac2021/cloud-logo.svg" alt="zurihac2021 logo" class="logo">
     </div>
-    <div class="mover cloud-c">
+    <div class="floater cloud-c">
       <img src="/images/zurihac2021/cloud-c.svg" alt="abstract cloud" class="cloud">
       <img src="/images/zurihac2021/cloud-logo.svg" alt="zurihac2021 logo" class="logo">
     </div>
-  </div>
+  </header>
 
   <main>
     $body$
@@ -173,7 +169,7 @@
     <a href="/privacy-policy.html">Privacy Policy</a>
     <br>
     Header image modified from <a href="https://openclipart.org/favs/306465/simple-nature-banner">artwork by j4p4n on
-      openclipart</a>.
+    openclipart</a>.
   </footer>
 </body>
 
