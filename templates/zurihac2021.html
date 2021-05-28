@@ -20,25 +20,28 @@
   <meta name="twitter:card" content="summary" />
   <style>
     :root {
-      --ani-total-duration: 20s;
-      --mover-size: 1;
-      --mover-ypos: 0;
-      --mover-zpos: 1;
+      --ani-total-duration: 60s;
+      --mover-y: 0;
+      --mover-z: 1;
     }
     @media screen and (max-width: 768px) {
       :root{
-        --ani-total-duration: 10s;
+        --ani-total-duration: 30s;
       }
     }
 
     .animation-wrapper {
+      position: relative;
       height: 400px;
-      position: absolute;
       overflow-x: hidden;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 1000000;
+      background-image: url("/images/zurihac2021/header-fill.svg");
+      background-size: auto 400px;
+      background-repeat: repeat-x;
+      background-position: center;
+      /* z-index: 1000000;
       /* outline: red dashed 10px;
         outline-offset: -10px; */
     }
@@ -47,7 +50,8 @@
       position: absolute;
       width: 300px;
       height: 300px;
-      animation: moving calc(var(--ani-total-duration) * var(--mover-zpos)) linear infinite both;
+      animation: moving calc(var(--ani-total-duration) / var(--mover-z)) linear infinite both;
+      /* z-index: var(--mover-z); */
     }
 
     .mover .logo,
@@ -70,63 +74,82 @@
     .mover.cloud-a .logo,
     .mover.cloud-a .cloud {
       animation-delay: 0s;
-      --mover-zpos: 1;
-      z-index: 3;
+      --mover-z: 1;
+      --mover-y: 40px;
     }
 
     .mover.cloud-b,
     .mover.cloud-b .logo,
     .mover.cloud-b .cloud {
       animation-delay: calc(var(--ani-total-duration) / -5);
-      --mover-ypos: -100px;
-      --mover-zpos: 1.5;
-      z-index: 2;
+      --mover-y: -100px;
+      --mover-z: 2;
     }
 
     .mover.cloud-c,
     .mover.cloud-c .logo,
     .mover.cloud-c .cloud {
       animation-delay: calc(var(--ani-total-duration) / -3 * 2);
-      --mover-zpos: 2;
-      --mover-ypos: -50px;
-      z-index: 1;
+      --mover-z: 3;
+      --mover-y: -50px;
     }
 
     @keyframes cloud-frames {
-      0% {   filter: blur(0em); opacity: 1.0; }
-      20% {  filter: blur(0em); opacity: 1.0; }
-      50% {  filter: blur(5em); opacity: 0.0; }
-      80% {  filter: blur(0em); opacity: 1.0; }
-      100% { filter: blur(0em); opacity: 1.0; }
+      0% {   filter: blur( 0px); opacity: 1.0; }
+      20% {  filter: blur( 0px); opacity: 1.0; }
+      50% {  filter: blur(25px); opacity: 0.0; }
+      80% {  filter: blur( 0px); opacity: 1.0; }
+      100% { filter: blur( 0px); opacity: 1.0; }
     }
 
     @keyframes logo-frames {
-      0% {   filter: blur(0em); opacity: 0.0; }
-      10% {  filter: blur(5em); opacity: 0.0; }
-      45% {  filter: blur(0em); opacity: 1.0; }
-      55% {  filter: blur(0em); opacity: 1.0; }
-      90% {  filter: blur(5em); opacity: 0.0; }
-      100% { filter: blur(0em); opacity: 0.0; }
+      0% {   filter: blur(25px); opacity: 0.0; }
+      10% {  filter: blur(25px); opacity: 0.0; }
+      45% {  filter: blur( 0px); opacity: 1.0; }
+      55% {  filter: blur( 0px); opacity: 1.0; }
+      90% {  filter: blur(25px); opacity: 0.0; }
+      100% { filter: blur(25px); opacity: 0.0; }
     }
 
     @keyframes moving {
       0% {
-        transform: translate3d(-100%,var(--mover-ypos),0) scale(calc(1 / var(--mover-zpos)));
+        transform: translate3d(-100%,var(--mover-y),0) scale(calc(0.5 * var(--mover-z)));
       }
       100% {
-        transform: translate3d(100vw,var(--mover-ypos),0) scale(calc(1 / var(--mover-zpos)));
+        transform: translate3d(100vw,var(--mover-y),0) scale(calc(0.5 * var(--mover-z)));
       }
     }
+
+    .header-background, .header-foreground{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-size: auto 400px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .header-background {
+      background-image: url("/images/zurihac2021/header-background.svg");
+    }
+
+    .header-foreground {
+      background-image: url("/images/zurihac2021/header-foreground.svg");
+    }
+
   </style>
 </head>
 
 <body>
-
   <div class="animation-wrapper">
+    <img class="header-background">
     <div class="mover cloud-a">
       <img src="/images/zurihac2021/cloud-a.svg" alt="abstract cloud" class="cloud">
       <img src="/images/zurihac2021/cloud-logo.svg" alt="zurihac2021 logo" class="logo">
     </div>
+    <img class="header-foreground">
     <div class="mover cloud-b">
       <img src="/images/zurihac2021/cloud-b.svg" alt="abstract cloud" class="cloud">
       <img src="/images/zurihac2021/cloud-logo.svg" alt="zurihac2021 logo" class="logo">
@@ -136,10 +159,6 @@
       <img src="/images/zurihac2021/cloud-logo.svg" alt="zurihac2021 logo" class="logo">
     </div>
   </div>
-
-  <header>
-    <a class="logo">ZURIHAC_2021</a>
-  </header>
 
   <main>
     $body$
